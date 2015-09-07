@@ -21,7 +21,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
         // check if the app has launched for the first time and if the memes array is empty
         if appDelegate.didLaunch == false && appDelegate.memes.count == 0 {
             // show the meme editor
-            self.performSegueWithIdentifier("ShowMemeEditor", sender: nil)
+            performSegueWithIdentifier("ShowMemeEditor", sender: nil)
             appDelegate.didLaunch == true
         }
     }
@@ -48,7 +48,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // show the meme in the detail view controller
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
+        let detailController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
         detailController.memedImage = appDelegate.memes[indexPath.row].memedImage
         self.navigationController!.pushViewController(detailController, animated: true)
     }

@@ -40,36 +40,36 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Do any additional setup after loading the view, typically from a nib.
         
         // set camera button status
-        self.cameraBarButtonItem.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        cameraBarButtonItem.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
         // configure the text fields
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = memeTextAttributes
         
-        self.topTextField.textAlignment = NSTextAlignment.Center
-        self.bottomTextField.textAlignment = NSTextAlignment.Center
+        topTextField.textAlignment = NSTextAlignment.Center
+        bottomTextField.textAlignment = NSTextAlignment.Center
         
-        self.topTextField.delegate = topTextFieldDelegate
-        self.bottomTextField.delegate = bottomTextFieldDelegate
+        topTextField.delegate = topTextFieldDelegate
+        bottomTextField.delegate = bottomTextFieldDelegate
         
         // constraints to keep the text fields in the correct place
         // the constant values will be adjusted when necessary
         topTextFieldConstraint = NSLayoutConstraint(item: topTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
-        self.view.addConstraint(topTextFieldConstraint)
+        view.addConstraint(topTextFieldConstraint)
         bottomTextFieldConstraint = NSLayoutConstraint(item: bottomTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
-        self.view.addConstraint(bottomTextFieldConstraint)
+        view.addConstraint(bottomTextFieldConstraint)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.subscribeToKeyboardNotifications()
-        self.subscribeToDeviceRotationNotifications()
+        subscribeToKeyboardNotifications()
+        subscribeToDeviceRotationNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,13 +105,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let keyboardHeight = getKeyboardHeight(notification)
             let imageRect = getImageRect()
             let verticalDisplacement = keyboardHeight - UIScreen.mainScreen().bounds.height + imageRect.origin.y + imageRect.height
-            self.view.frame.origin.y -= verticalDisplacement
+            view.frame.origin.y -= verticalDisplacement
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         // reset the view position
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -126,7 +126,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func takeNewImage(sender: UIBarButtonItem) {
@@ -134,7 +134,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func shareMeme(sender: UIBarButtonItem) {
@@ -143,7 +143,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             // remind the user to enter text
             let alertView = UIAlertController(title: "Save Failed", message: "Please enter text into both fields.", preferredStyle: UIAlertControllerStyle.Alert)
             alertView.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-            self.presentViewController(alertView, animated: true, completion: nil)
+            presentViewController(alertView, animated: true, completion: nil)
         } else {
             // close the keyboard if it is showing
             topTextField.resignFirstResponder()
@@ -153,20 +153,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             let memedImage = generateMemedImage()
             
             let activityView = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-            self.presentViewController(activityView, animated: true, completion: {
+            presentViewController(activityView, animated: true, completion: {
                 self.save(memedImage)})
         }
     }
     
     @IBAction func dismissView(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         
         // get the selected image
         self.image = image
-        self.imageView.image = image
+        imageView.image = image
         
         // update the text fields for the image
         positionTextFields()
@@ -174,7 +174,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         bottomTextField.hidden = false
         
         // return to the editor view
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func save(memedImage: UIImage) {
@@ -239,8 +239,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func generateMemedImage() -> UIImage {
         // take a screenshot of the view
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame,
+        UIGraphicsBeginImageContext(view.frame.size)
+        self.view.drawViewHierarchyInRect(view.frame,
             afterScreenUpdates: true)
         let Screenshot : UIImage =
         UIGraphicsGetImageFromCurrentImageContext()

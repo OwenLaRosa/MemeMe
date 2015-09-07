@@ -33,14 +33,14 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appDelegate.memes.count
+        return appDelegate.memes.count
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // show the meme in the detail view controller
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
         detailController.memedImage = appDelegate.memes[indexPath.row].memedImage
-        self.navigationController!.pushViewController(detailController, animated: true)
+        navigationController!.pushViewController(detailController, animated: true)
     }
     
 }
