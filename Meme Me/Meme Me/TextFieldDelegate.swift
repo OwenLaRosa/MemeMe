@@ -39,7 +39,7 @@ class TextFieldDelegate: NSObject, UITextFieldDelegate {
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        var newText = textField.text as NSString
+        var newText = textField.text! as NSString
         newText = newText.stringByReplacingCharactersInRange(range, withString: string)
         
         // ensure all inserted text is capitalized

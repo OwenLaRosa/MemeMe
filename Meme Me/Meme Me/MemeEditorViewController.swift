@@ -179,7 +179,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func save(memedImage: UIImage) {
         // creates a custom meme object and saves it to the memes array
-        let memeObject = Meme(topText: topTextField.text, bottomText: bottomTextField.text, image: image, memedImage: memedImage)
+        let memeObject = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: image, memedImage: memedImage)
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(memeObject)
@@ -249,7 +249,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // determine meme location and crop the screenshot accordingly
         let imageRect = getImageRect()
 
-        let croppedImage: CGImageRef = CGImageCreateWithImageInRect(Screenshot.CGImage, imageRect)
+        let croppedImage: CGImageRef = CGImageCreateWithImageInRect(Screenshot.CGImage, imageRect)!
         
         let memedImage = UIImage(CGImage: croppedImage)
         

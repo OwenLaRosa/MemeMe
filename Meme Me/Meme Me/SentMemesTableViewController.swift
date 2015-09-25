@@ -36,7 +36,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell")!
         let meme = self.appDelegate.memes[indexPath.row]
         
         // set the image and name
