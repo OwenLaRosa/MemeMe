@@ -253,6 +253,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         let memedImage = UIImage(CGImage: croppedImage)
         
-        return memedImage!
+        return memedImage
     }
 }

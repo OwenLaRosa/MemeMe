@@ -38,7 +38,7 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // show the meme in the detail view controller
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")! as! MemeDetailViewController
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailController.memedImage = appDelegate.memes[indexPath.row].memedImage
         navigationController!.pushViewController(detailController, animated: true)
     }
