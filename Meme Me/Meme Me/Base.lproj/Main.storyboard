@@ -34,12 +34,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="75" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ztp-BD-Zvr">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ztp-BD-Zvr">
                                                     <rect key="frame" x="0.0" y="0.0" width="75" height="73"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="ztp-BD-Zvr" firstAttribute="leading" secondItem="vfW-ak-BFi" secondAttribute="leading" id="6dC-Wi-CBk"/>
+                                            <constraint firstAttribute="bottom" secondItem="ztp-BD-Zvr" secondAttribute="bottom" id="AYx-mP-Yb5"/>
+                                            <constraint firstAttribute="trailing" secondItem="ztp-BD-Zvr" secondAttribute="trailing" id="EAQ-J7-Fdh"/>
+                                            <constraint firstItem="ztp-BD-Zvr" firstAttribute="top" secondItem="vfW-ak-BFi" secondAttribute="top" id="r1i-HY-uK9"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="memedImageView" destination="ztp-BD-Zvr" id="YzV-Db-sC5"/>
                                         </connections>

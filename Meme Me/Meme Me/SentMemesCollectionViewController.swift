@@ -22,6 +22,23 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         collectionView.reloadData()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let cellSpacing = CGFloat(4)
+        let cellsPerRow = CGFloat(3)
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.sectionInset = UIEdgeInsets(top: cellSpacing, left: cellSpacing, bottom: cellSpacing, right: cellSpacing)
+        
+        layout.minimumLineSpacing = cellSpacing
+        layout.minimumInteritemSpacing = cellSpacing
+        
+        let sideLength = floor((collectionView.frame.size.width - cellSpacing * (cellsPerRow + 1)) / cellsPerRow)
+        layout.itemSize = CGSize(width: sideLength, height: sideLength)
+        collectionView.collectionViewLayout = layout
+    }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = self.appDelegate.memes[indexPath.row]
